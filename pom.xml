@@ -43,6 +43,7 @@
 
   <modules>
     <module>UserAuthentication</module>
+    <module>RestaurantService</module>
   </modules>
 
 

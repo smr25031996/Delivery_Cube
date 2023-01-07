@@ -46,6 +46,7 @@
     <module>RestaurantService</module>
     <module>FavoriteService</module>
     <module>API_GateWay</module>
+    <module>Eureka_Server</module>
   </modules>
 
 

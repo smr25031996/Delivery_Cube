@@ -45,6 +45,7 @@
     <module>UserAuthentication</module>
     <module>RestaurantService</module>
     <module>FavoriteService</module>
+    <module>API_GateWay</module>
   </modules>
 
 

@@ -1,0 +1,88 @@
+version: '3.9'
+services:
+  restaurant-service:
+    image: restaurant_image
+    container_name: restaurant-container
+    build: RestaurantService
+    restart: always
+    networks:
+      - deliverynetwork
+    ports:
+      - 8086:8086
+    depends_on:
+      - mongoService
+      - cloudapiservice
+
+
+  mongoService:
+    image: mongo:latest
+    container_name: mongoService
+    ports:
+      - 27017:27017
+    networks:
+      - deliverynetwork
+
+  favorite-service:
+    image: favorite_image
+    container_name: favorite-container
+    build: FavoriteService
+    restart: always
+    networks:
+      - deliverynetwork
+    ports:
+      - 8087:8087
+    depends_on:
+      - mongoService
+      - cloudapiservice
+
+
+
+
+  authentication-service:
+    image: authentication_image
+    container_name: authentication-container
+    build: UserAuthentication
+    restart: always
+    networks:
+      - deliverynetwork
+    ports:
+      - 8085:8085
+    depends_on:
+      - mysqlService
+      - cloudapiservice
+
+
+  mysqlService:
+    image: mysql:latest
+    container_name: mysqlService
+    networks:
+      - deliverynetwork
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  cloudapiservice:
+    image: apigateway-service
+    build: API_GateWay
+    restart: always
+    networks:
+      - deliverynetwork
+    ports:
+      - 9000:9000
+
+  eureka-service:
+    container_name: containerEureka
+    build: Eureka_Server
+    restart: always
+    networks:
+      - deliverynetwork
+    ports:
+      - 8761:8761
+
+networks:
+  deliverynetwork:
+    driver: bridge

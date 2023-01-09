@@ -22,14 +22,14 @@ public class ApiGateWayApplication {
 		return builder.routes()
 				.route(p -> p
 						.path("/api/v1/**")
-						.uri("http://localhost:8085/")) // use the name of the application in the uri
+						.uri("http://authentication-service:8085/")) // use the name of the application in the uri
 
 				.route(p -> p
 						.path("/api/v2/**")
-						.uri("http://localhost:8086/"))
+						.uri("http://restaurant-service:8086/"))
 				.route(p -> p
 						.path("/api/v3/**")
-						.uri("http://localhost:8087/"))
+						.uri("http://favorite-service:8087/"))
 				.build();
 	}
 }

@@ -5,11 +5,8 @@
  */
 package com.niit.UserAuthentication.service;
 
-import com.niit.UserAuthentication.domain.Admin;
 import com.niit.UserAuthentication.domain.User;
-import com.niit.UserAuthentication.exception.AdminNotFoundException;
 import com.niit.UserAuthentication.exception.UserNotFoundException;
-import com.niit.UserAuthentication.repository.AdminRepository;
 import com.niit.UserAuthentication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +17,10 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
 
     private UserRepository userRepository;
-    private AdminRepository adminRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, AdminRepository adminRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.adminRepository = adminRepository;
     }
 
     @Override
@@ -47,12 +42,5 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
 
-    @Override
-    public Admin findByAdminEmailAndPassword(String email, String password) throws AdminNotFoundException {
-        Admin admin = adminRepository.findAdminByEmailAndPassword(email, password);
-        if (admin == null) {
-            throw new AdminNotFoundException();
-        }
-        return admin;
-    }
+
 }

@@ -9,6 +9,9 @@ import java.util.Optional;
 public interface IRestaurantService  {
 
     User registerUser(User user);
+
+    List<User> getUsers();
+
     Restaurant saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurants();
     Restaurant getByRestaurantName(String name);

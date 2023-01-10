@@ -38,6 +38,11 @@ public class RestaurantServiceImpl implements IRestaurantService{
     }
 
     @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public Restaurant saveRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }

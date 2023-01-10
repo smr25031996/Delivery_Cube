@@ -29,6 +29,11 @@ public class RestaurantController {
         return  new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED) ;
     }
 
+    @GetMapping("/fetchUser")
+    public ResponseEntity<?> fetchUser( ){
+        return  new ResponseEntity<>(iRestaurantService.getUsers(), HttpStatus.OK) ;
+    }
+
     @PostMapping("/saveRestaurant")
     public ResponseEntity<?> saveRestaurant(@RequestBody Restaurant restaurant){
     return  new ResponseEntity<>(iRestaurantService.saveRestaurant(restaurant), HttpStatus.CREATED) ;

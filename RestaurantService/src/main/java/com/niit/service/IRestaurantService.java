@@ -1,11 +1,14 @@
 package com.niit.service;
 
 import com.niit.domain.Restaurant;
+import com.niit.domain.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IRestaurantService  {
+
+    User registerUser(User user);
     Restaurant saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurants();
     Restaurant getByRestaurantName(String name);
@@ -21,7 +24,6 @@ public interface IRestaurantService  {
     List<Restaurant> getRestaurantByFoodItemName(String foodItemName);
     List<Restaurant> getRestaurantByCuisine(String cuisine);
     List<Restaurant> getRestaurantByPrice(int price);
-
 
 
 

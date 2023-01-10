@@ -7,6 +7,7 @@
 package com.niit.controller;
 
 import com.niit.domain.Restaurant;
+import com.niit.domain.User;
 import com.niit.service.IRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.Update;
@@ -21,6 +22,11 @@ public class RestaurantController {
 @Autowired
     public RestaurantController(IRestaurantService iRestaurantService) {
         this.iRestaurantService = iRestaurantService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user){
+        return  new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED) ;
     }
 
     @PostMapping("/saveRestaurant")

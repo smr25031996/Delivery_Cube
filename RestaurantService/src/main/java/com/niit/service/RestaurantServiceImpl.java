@@ -7,7 +7,10 @@
 package com.niit.service;
 
 import com.niit.domain.Restaurant;
+import com.niit.domain.User;
+import com.niit.proxy.UserProxy;
 import com.niit.repository.RestaurantRepository;
+import com.niit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,21 @@ import java.util.Optional;
 @Service
 public class RestaurantServiceImpl implements IRestaurantService{
     private RestaurantRepository restaurantRepository;
+    private UserRepository userRepository;
+
+    private UserProxy userProxy;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, UserProxy userProxy) {
         this.restaurantRepository = restaurantRepository;
+        this.userRepository = userRepository;
+        this.userProxy = userProxy;
+    }
+
+    @Override
+    public User registerUser(User user) {
+        userProxy.saveUser(user);
+        return userRepository.save(user);
     }
 
     @Override

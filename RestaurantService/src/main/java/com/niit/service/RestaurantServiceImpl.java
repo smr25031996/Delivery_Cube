@@ -6,11 +6,15 @@
 
 package com.niit.service;
 
+import com.niit.configuration.MessageDTO;
+import com.niit.configuration.Producer;
 import com.niit.domain.Restaurant;
 import com.niit.domain.User;
 import com.niit.proxy.UserProxy;
 import com.niit.repository.RestaurantRepository;
 import com.niit.repository.UserRepository;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,23 +27,64 @@ public class RestaurantServiceImpl implements IRestaurantService{
     private UserRepository userRepository;
 
     private UserProxy userProxy;
+    private  Optional<User> favoriteUser;
+
+    private final RabbitTemplate rabbitTemplate;
+    private final DirectExchange directExchange;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, UserProxy userProxy) {
+    Producer producer;
+
+    @Autowired
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, UserProxy userProxy, Optional<User> favoriteUser,RabbitTemplate rabbitTemplate,DirectExchange directExchange) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.userProxy = userProxy;
+        this.rabbitTemplate = rabbitTemplate;
+        this.directExchange = directExchange;
+        this.favoriteUser= favoriteUser;
     }
 
     @Override
     public User registerUser(User user) {
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setEmail(user.getEmail());
+        if(userRepository.findById(user.getEmail()).isPresent())
+        {
+           favoriteUser=getUserByEmail(user.getEmail());
+            if (user.getEmail().equals(favoriteUser.get().getEmail())) {
+                System.out.println("Invalid email: " + user.getEmail());
+            } else {
+               userRepository.save(user);
+                System.out.println("saved user in mongo");
+                producer.sendMessage(messageDTO);
+            }
+
+        } else {
+            userRepository.save(user);
+            System.out.println("saved user in mongo");
+            producer.sendMessage(messageDTO);
+        }
+
         userProxy.saveUser(user);
-        return userRepository.save(user);
+        return user;
     }
 
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+
+        Optional<User> user=userRepository.findById(email);
+
+        System.out.println(" user data fetched from client request---"+user.get().toString());
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setEmail(user.get().getEmail());
+        producer.sendMessage(messageDTO);
+        return user;
     }
 
     @Override
@@ -127,6 +172,14 @@ public class RestaurantServiceImpl implements IRestaurantService{
     public List<Restaurant> getRestaurantByPrice(int price) {
         return restaurantRepository.findAllRestaurantPrice(price);
     }
+
+    @Override
+    public MessageDTO sendMessage(MessageDTO messageDTO) {
+        producer.sendMessage(messageDTO);
+        return messageDTO;
+    }
+
+
 
 
 }

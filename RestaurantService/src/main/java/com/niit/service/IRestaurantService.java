@@ -1,5 +1,6 @@
 package com.niit.service;
 
+import com.niit.configuration.MessageDTO;
 import com.niit.domain.Restaurant;
 import com.niit.domain.User;
 
@@ -10,7 +11,10 @@ public interface IRestaurantService  {
 
     User registerUser(User user);
 
+
+
     List<User> getUsers();
+    Optional<User> getUserByEmail(String email);
 
     Restaurant saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurants();
@@ -28,7 +32,9 @@ public interface IRestaurantService  {
     List<Restaurant> getRestaurantByCuisine(String cuisine);
     List<Restaurant> getRestaurantByPrice(int price);
 
+    MessageDTO sendMessage(MessageDTO messageDTO);
 
+  
 
 
 

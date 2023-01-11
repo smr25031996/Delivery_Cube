@@ -53,4 +53,9 @@ public class FavoriteServiceImpl implements IFavoriteService {
     public List<Order> getOrderList() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public Favorite getByEmail(String email) {
+        return favoriteRepository.findByEmail(email);
+    }
 }

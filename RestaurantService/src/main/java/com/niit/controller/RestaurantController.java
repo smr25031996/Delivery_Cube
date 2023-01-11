@@ -6,6 +6,7 @@
 
 package com.niit.controller;
 
+import com.niit.configuration.MessageDTO;
 import com.niit.domain.Restaurant;
 import com.niit.domain.User;
 import com.niit.service.IRestaurantService;
@@ -14,6 +15,8 @@ import org.springframework.data.mongodb.repository.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v2")
@@ -26,8 +29,11 @@ public class RestaurantController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user){
+
         return  new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED) ;
     }
+
+
 
     @GetMapping("/fetchUser")
     public ResponseEntity<?> fetchUser( ){

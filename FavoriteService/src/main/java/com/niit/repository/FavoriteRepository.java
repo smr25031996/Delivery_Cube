@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FavoriteRepository extends MongoRepository<Favorite,String> {
+    Favorite findByEmail(String email);
 }

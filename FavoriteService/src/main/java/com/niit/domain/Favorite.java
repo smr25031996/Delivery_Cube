@@ -19,10 +19,7 @@ public class Favorite {
     public Favorite() {
     }
 
-    @Override
-    public String toString() {
-        return "Favorite{" + "email='" + email + '\'' + ", restaurantList=" + restaurantList + '}';
-    }
+
 
     public String getEmail() {
         return email;
@@ -38,5 +35,13 @@ public class Favorite {
 
     public void setRestaurantList(List<RestaurantList> restaurantList) {
         this.restaurantList = restaurantList;
+    }
+
+    @Override
+    public String toString() {
+        return "Favorite{" +
+                "email='" + email + '\'' +
+                ", restaurantList=" + restaurantList +
+                '}';
     }
 }

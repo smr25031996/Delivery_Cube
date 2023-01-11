@@ -21,6 +21,7 @@ public class User {
     private String profileImage;
     private Address address;
 
+
     public User() {
     }
 

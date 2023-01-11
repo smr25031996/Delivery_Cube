@@ -1,17 +1,31 @@
 package com.niit.domain;
 
-public class RestaurantList {
-    private String restaurantName;
-    private String location;
-    private String cuisine;
+import java.util.List;
 
-    @Override
-    public String toString() {
-        return "RestaurantList{" +
-                "restaurantName='" + restaurantName + '\'' +
-                ", location='" + location + '\'' +
-                ", cuisine='" + cuisine + '\'' +
-                '}';
+public class RestaurantList {
+    private int restaurantId;
+    private String restaurantName;
+    private double rating;
+    private List<MenuList> menuList;
+    private String location;
+
+    public RestaurantList() {
+    }
+
+    public RestaurantList(int restaurantId, String restaurantName, double rating, List<MenuList> menuList, String location) {
+        this.restaurantId = restaurantId;
+        this.restaurantName = restaurantName;
+        this.rating = rating;
+        this.menuList = menuList;
+        this.location = location;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {
@@ -22,6 +36,22 @@ public class RestaurantList {
         this.restaurantName = restaurantName;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public List<MenuList> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<MenuList> menuList) {
+        this.menuList = menuList;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -30,21 +60,15 @@ public class RestaurantList {
         this.location = location;
     }
 
-    public String getCuisine() {
-        return cuisine;
-    }
-
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
-
-    public RestaurantList(String restaurantName, String location, String cuisine) {
-        this.restaurantName = restaurantName;
-        this.location = location;
-        this.cuisine = cuisine;
-    }
-
-    public RestaurantList() {
+    @Override
+    public String toString() {
+        return "RestaurantList{" +
+                "restaurantId=" + restaurantId +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", rating=" + rating +
+                ", menuList=" + menuList +
+                ", location='" + location + '\'' +
+                '}';
     }
 }
 

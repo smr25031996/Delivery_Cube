@@ -61,6 +61,16 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
+    public Optional<Order> getOrderByEmail(String email) {
+        return orderRepository.findById(email);
+    }
+
+    @Override
+    public Optional<Cart> getCartByEmail(String email) {
+        return cartRepository.findById(email);
+    }
+
+    @Override
     public Favorite addFavourite(Favorite favorite, String email) {
         Optional<Favorite> existingFavourite = favoriteRepository.findById(email);
         if (existingFavourite.isEmpty()) {
@@ -76,5 +86,46 @@ public class FavoriteServiceImpl implements IFavoriteService {
 
 
         return favoriteRepository.save(favorite1);
+    }
+
+    @Override
+    public Cart addToCart(Cart cart, String email) {
+        Optional<Cart> existingCart = cartRepository.findById(email);
+        if (existingCart.isEmpty()) {
+            return null;
+        }
+        Cart cart1 = existingCart.get();
+        if (cart.getEmail() != null) {
+            cart1.setEmail(cart.getEmail());
+        }
+        if (cart.getMenuLists() != null) {
+            cart1.setMenuLists(cart.getMenuLists());
+        }
+
+
+        return cartRepository.save(cart1);
+    }
+
+    @Override
+    public Order addOrder(Order order, String email) {
+        Optional<Order> existingOrder = orderRepository.findById(email);
+        if (existingOrder.isEmpty()) {
+            return null;
+        }
+        Order order1 = existingOrder.get();
+        if (order.getEmail() != null) {
+            order1.setEmail(order.getEmail());
+        }
+        if (order.getMenuLists() != null) {
+            order1.setMenuLists(order.getMenuLists());
+        }
+        if (order.getRestaurantLists() != null) {
+            order1.setRestaurantLists(order.getRestaurantLists());
+        }
+        if (order.getTotalBill() == 0) {
+            order1.setTotalBill(order.getTotalBill());
+        }
+
+        return orderRepository.save(order1);
     }
 }

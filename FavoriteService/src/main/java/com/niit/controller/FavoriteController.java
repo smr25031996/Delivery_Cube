@@ -49,4 +49,19 @@ public class FavoriteController {
     public ResponseEntity<?> getOrder() {
         return new ResponseEntity<>(iFavoriteService.getOrderList(), HttpStatus.OK);
     }
+
+    @PutMapping("/addFavorite")
+    public ResponseEntity<?> addFavorite(@RequestBody Favorite favorite, @PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.addFavourite(favorite, email), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/addOrder")
+    public ResponseEntity<?> addOrder(@RequestBody Order order, @PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.addOrder(order, email), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/addCart")
+    public ResponseEntity<?> addCart(@RequestBody Cart cart, @PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.addToCart(cart, email), HttpStatus.ACCEPTED);
+    }
 }

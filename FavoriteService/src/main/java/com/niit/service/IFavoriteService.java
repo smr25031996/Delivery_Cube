@@ -5,6 +5,7 @@ import com.niit.domain.Favorite;
 import com.niit.domain.Order;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IFavoriteService {
     Favorite saveFavorite(Favorite favorite);
@@ -21,6 +22,14 @@ public interface IFavoriteService {
 
     Favorite getByEmail(String email);
 
+    Optional<Order> getOrderByEmail(String email);
+
+    Optional<Cart> getCartByEmail(String email);
+
     Favorite addFavourite(Favorite favorite, String email);
+
+    Cart addToCart(Cart cart, String email);
+
+    Order addOrder(Order order, String email);
 
 }

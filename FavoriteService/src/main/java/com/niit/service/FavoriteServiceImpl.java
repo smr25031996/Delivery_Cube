@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FavoriteServiceImpl implements IFavoriteService {
@@ -57,5 +58,23 @@ public class FavoriteServiceImpl implements IFavoriteService {
     @Override
     public Favorite getByEmail(String email) {
         return favoriteRepository.findByEmail(email);
+    }
+
+    @Override
+    public Favorite addFavourite(Favorite favorite, String email) {
+        Optional<Favorite> existingFavourite = favoriteRepository.findById(email);
+        if (existingFavourite.isEmpty()) {
+            return null;
+        }
+        Favorite favorite1 = existingFavourite.get();
+        if (favorite.getEmail() != null) {
+            favorite1.setEmail(favorite.getEmail());
+        }
+        if (favorite.getRestaurantList() != null) {
+            favorite1.setRestaurantList(favorite.getRestaurantList());
+        }
+
+
+        return favoriteRepository.save(favorite1);
     }
 }

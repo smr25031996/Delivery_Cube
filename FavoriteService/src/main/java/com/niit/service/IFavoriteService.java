@@ -18,5 +18,9 @@ public interface IFavoriteService {
     List<Cart> getCartList();
 
     List<Order> getOrderList();
+
     Favorite getByEmail(String email);
+
+    Favorite addFavourite(Favorite favorite, String email);
+
 }

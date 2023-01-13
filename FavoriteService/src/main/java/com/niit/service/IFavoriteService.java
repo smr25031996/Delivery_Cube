@@ -21,15 +21,12 @@ public interface IFavoriteService {
     List<Order> getOrderList();
 
     Favorite getByEmail(String email);
-
     Optional<Order> getOrderByEmail(String email);
-
     Optional<Cart> getCartByEmail(String email);
 
     Favorite addFavourite(Favorite favorite, String email);
-
     Cart addToCart(Cart cart, String email);
-
     Order addOrder(Order order, String email);
+
 
 }

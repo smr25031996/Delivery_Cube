@@ -20,8 +20,8 @@ public class FavoriteController {
     }
 
 
-    @PostMapping("/saveFavorite")
-    public ResponseEntity<?> saveFavorite(@RequestBody Favorite favorite) {
+    @PostMapping("/saveFavorite/{email}")
+    public ResponseEntity<?> saveFavorite(@RequestBody Favorite favorite, @PathVariable String email) {
         return new ResponseEntity<>(iFavoriteService.saveFavorite(favorite), HttpStatus.CREATED);
     }
 
@@ -50,18 +50,20 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.getOrderList(), HttpStatus.OK);
     }
 
-    @PutMapping("/addFavorite")
+    @PutMapping("/addFavorite/{email}")
     public ResponseEntity<?> addFavorite(@RequestBody Favorite favorite, @PathVariable String email) {
         return new ResponseEntity<>(iFavoriteService.addFavourite(favorite, email), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/addOrder")
+    @PutMapping("/addOrder/{email}")
     public ResponseEntity<?> addOrder(@RequestBody Order order, @PathVariable String email) {
         return new ResponseEntity<>(iFavoriteService.addOrder(order, email), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/addCart")
+    @PutMapping("/addCart/{email}")
     public ResponseEntity<?> addCart(@RequestBody Cart cart, @PathVariable String email) {
         return new ResponseEntity<>(iFavoriteService.addToCart(cart, email), HttpStatus.ACCEPTED);
     }
+
+
 }

@@ -71,6 +71,33 @@ public class RestaurantServiceImpl implements IRestaurantService{
     }
 
     @Override
+    public User updateUser(User user, String email) {
+        Optional<User> existingUser = userRepository.findById(email);
+        if (existingUser.isEmpty()) {
+            return null;
+        }
+        User user1 = existingUser.get();
+        if (user.getFirstName() != null) {
+            user1.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            user1.setLastName(user.getLastName());
+        }
+        if (user.getPhone() != 0) {
+            user1.setPhone(user.getPhone());
+        }
+
+        if (user.getProfileImage() != null) {
+            user1.setProfileImage(user.getProfileImage());
+        }
+
+        if (user.getAddress() != null) {
+            user1.setAddress(user.getAddress());
+        }
+        return userRepository.save(user1);
+    }
+
+    @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }

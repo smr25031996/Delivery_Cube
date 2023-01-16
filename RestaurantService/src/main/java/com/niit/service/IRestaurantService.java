@@ -11,7 +11,7 @@ public interface IRestaurantService  {
 
     User registerUser(User user);
 
-
+    User updateUser(User user, String email);
 
     List<User> getUsers();
     Optional<User> getUserByEmail(String email);

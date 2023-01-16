@@ -40,6 +40,10 @@ public class RestaurantController {
         return  new ResponseEntity<>(iRestaurantService.getUsers(), HttpStatus.OK) ;
     }
 
+    @PutMapping("/updateUser/{email}")
+    public ResponseEntity<?> updateByEmail(@RequestBody User user, @PathVariable String email) {
+        return  new ResponseEntity<>(iRestaurantService.updateUser(user,email), HttpStatus.ACCEPTED) ;
+    }
     @PostMapping("/saveRestaurant")
     public ResponseEntity<?> saveRestaurant(@RequestBody Restaurant restaurant){
     return  new ResponseEntity<>(iRestaurantService.saveRestaurant(restaurant), HttpStatus.CREATED) ;

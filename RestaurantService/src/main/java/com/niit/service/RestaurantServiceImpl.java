@@ -98,6 +98,11 @@ public class RestaurantServiceImpl implements IRestaurantService{
     }
 
     @Override
+    public Optional<User> getUserById(String email) {
+        return userRepository.findById(email);
+    }
+
+    @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }

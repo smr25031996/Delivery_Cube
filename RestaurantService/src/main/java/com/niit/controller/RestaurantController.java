@@ -33,7 +33,10 @@ public class RestaurantController {
         return  new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED) ;
     }
 
-
+    @GetMapping("/userbyid/{email}")
+    public ResponseEntity<?> getUserbyId(@PathVariable String email) {
+        return  new ResponseEntity<>(iRestaurantService.getUserById(email), HttpStatus.OK) ;
+    }
 
     @GetMapping("/fetchUser")
     public ResponseEntity<?> fetchUser( ){

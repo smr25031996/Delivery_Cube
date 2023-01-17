@@ -9,12 +9,6 @@ B
 docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
 \
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
-ó
-gUserAuthentication/src/main/java/com/niit/UserAuthentication/service/JwtSecurityTokenGeneratorImpl.java,f\9\f91494718277f126c7a1da6fb14218c050c084c3
-ê
-`UserAuthentication/src/main/java/com/niit/UserAuthentication/service/SecurityTokenGenerator.java,d\3\d35899b9a2bf548e221421fc77c9f249fecc544d
-}
-MUserAuthentication/src/main/java/com/niit/UserAuthentication/domain/User.java,3\5\35008855e80ab734301b28fe51ec29f527bbd92c
 w
 GRestaurantService/src/main/java/com/niit/repository/UserRepository.java,7\c\7ca308f23aa5cb861de56ba3354d11a5cfead61e
 â
@@ -25,8 +19,6 @@ I
 RestaurantService/pom.xml,1\d\1d198e678bfdac69155bf7fbd12bf3ca114b3a05
 z
 JRestaurantService/src/main/java/com/niit/RestaurantServiceApplication.java,3\e\3e917f8724f40b04f2af78973acf70751b129f8c
-m
-=RestaurantService/src/main/java/com/niit/proxy/UserProxy.java,9\9\99649a5b1393686326b8f722e114292a2fe3b78b
 k
 ;FavoriteService/src/main/java/com/niit/domain/Favorite.java,c\b\cb157a9d0228476a146fafd66ba9c7c5897fcd75
 q
@@ -35,3 +27,5 @@ w
 GFavoriteService/src/main/java/com/niit/service/FavoriteServiceImpl.java,e\7\e7007bbdae47e2aa9fec264a756c6c07fb1c2a40
 o
 ?RestaurantService/src/main/java/com/niit/domain/Restaurant.java,e\f\efc0f16a3a2942060429dbd45a681b68d366eb55
+y
+IFavoriteService/src/main/java/com/niit/controller/FavoriteController.java,9\8\98b1f54faeea5d9fd9db76fff06930b22e29734f

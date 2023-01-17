@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity loginUser(@RequestBody User user) throws UserNotFoundException {
 
-        Map<String, String> map = null;
+        Map<String, Object> map = null;
         try {
             User userObj = iUserService.findByEmailAndPassword(user.getEmail(), user.getPassword());
             if (userObj.getEmail().equals(user.getEmail())) {

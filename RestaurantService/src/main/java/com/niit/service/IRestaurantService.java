@@ -13,6 +13,8 @@ public interface IRestaurantService  {
 
     User updateUser(User user, String email);
 
+    Optional<User> getUserById(String email);
+
     List<User> getUsers();
     Optional<User> getUserByEmail(String email);
 

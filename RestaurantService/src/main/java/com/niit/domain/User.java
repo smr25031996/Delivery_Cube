@@ -16,15 +16,17 @@ public class User {
     private String firstName;
     private String lastName;
     private long phone;
-    private String role="User";
+    private String role = "User";
     private String profileImage;
-    private Address address;
-
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
 
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, Address address) {
+    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -32,7 +34,10 @@ public class User {
         this.phone = phone;
         this.role = role;
         this.profileImage = profileImage;
-        this.address = address;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
     public String getEmail() {
@@ -75,8 +80,6 @@ public class User {
         this.phone = phone;
     }
 
-
-
     public String getRole() {
         return role;
     }
@@ -93,12 +96,36 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     @Override
@@ -111,7 +138,10 @@ public class User {
                 ", phone=" + phone +
                 ", role='" + role + '\'' +
                 ", profileImage='" + profileImage + '\'' +
-                ", address=" + address +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
                 '}';
     }
 }

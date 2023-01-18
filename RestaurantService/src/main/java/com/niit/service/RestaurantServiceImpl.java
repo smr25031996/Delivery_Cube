@@ -90,9 +90,17 @@ public class RestaurantServiceImpl implements IRestaurantService{
         if (user.getProfileImage() != null) {
             user1.setProfileImage(user.getProfileImage());
         }
-
-        if (user.getAddress() != null) {
-            user1.setAddress(user.getAddress());
+        if (user.getStreet() != null) {
+            user1.setStreet(user.getStreet());
+        }
+        if (user.getState() != null) {
+            user1.setState(user.getState());
+        }
+        if (user.getCity() != null) {
+            user1.setCity(user.getCity());
+        }
+        if (user.getZip() != null) {
+            user1.setZip(user.getZip());
         }
         return userRepository.save(user1);
     }

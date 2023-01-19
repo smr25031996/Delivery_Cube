@@ -8,8 +8,11 @@ package com.niit.service;
 
 import com.niit.configuration.MessageDTO;
 import com.niit.configuration.Producer;
+import com.niit.domain.MenuList;
 import com.niit.domain.Restaurant;
 import com.niit.domain.User;
+import com.niit.exception.MenuListNotFoundException;
+import com.niit.exception.RestaurantNotFoundException;
 import com.niit.proxy.UserProxy;
 import com.niit.repository.RestaurantRepository;
 import com.niit.repository.UserRepository;
@@ -18,6 +21,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,6 +162,7 @@ public class RestaurantServiceImpl implements IRestaurantService{
         return restaurantRepository.findByRating(rating);
     }
 
+
     @Override
     public boolean deleteRestaurants(int id) {
         restaurantRepository.deleteById(id);
@@ -220,6 +225,47 @@ public class RestaurantServiceImpl implements IRestaurantService{
     }
 
 
+    @Override
+    public Restaurant saveRestaurantMenuToList(MenuList menuList, int restaurantId) throws RestaurantNotFoundException {
+        if (restaurantRepository.findById(restaurantId).isEmpty()) {
+
+            throw new RestaurantNotFoundException();
+        }
+        Restaurant restaurant = restaurantRepository.findByRestaurantId(restaurantId);
+        if (restaurant.getMenuList() == null) {
+            System.out.println("In repo " + restaurantId);
+            restaurant.setMenuList(Collections.singletonList(menuList));
+        } else {
+            List<MenuList> menuLists = restaurant.getMenuList();
+            menuLists.add(menuList);
+            restaurant.setMenuList(menuLists);
+        }
+        return restaurantRepository.save(restaurant);
+    }
+
+    @Override
+    public List<MenuList> getAllRestaurantMenu(int restaurantId) throws RestaurantNotFoundException {
+        if (restaurantRepository.findById(restaurantId).isEmpty()) {
+            throw new RestaurantNotFoundException();
+        }
+        return restaurantRepository.findById(restaurantId).get().getMenuList();
+    }
+
+    @Override
+    public Restaurant deleteRestaurantMenuFromList(int restaurantId, String foodItemName) throws RestaurantNotFoundException, MenuListNotFoundException {
+        boolean foodItemIsPresent = false;
+        if (restaurantRepository.findById(restaurantId).isEmpty()) {
+            throw new RestaurantNotFoundException();
+        }
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        List<MenuList> menuLists = restaurant.getMenuList();
+        foodItemIsPresent = menuLists.removeIf(x -> x.getFoodItemName().equals(foodItemName));
+        if (!foodItemIsPresent) {
+            throw new MenuListNotFoundException();
+        }
+        restaurant.setMenuList(menuLists);
+        return restaurantRepository.save(restaurant);
+    }
 
 
 }

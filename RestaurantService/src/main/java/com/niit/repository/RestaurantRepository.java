@@ -9,7 +9,12 @@ import java.util.List;
 
 @Repository
 public interface RestaurantRepository extends MongoRepository<Restaurant, Integer> {
+
+
+    Restaurant findByRestaurantId(int restaurantId);
+
     List<Restaurant> findByRatingGreaterThan(double rating);
+
     List<Restaurant> findByRatingLessThan(double rating);
 
 

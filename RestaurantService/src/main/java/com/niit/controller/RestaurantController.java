@@ -6,31 +6,33 @@
 
 package com.niit.controller;
 
-import com.niit.configuration.MessageDTO;
+import com.niit.domain.MenuList;
 import com.niit.domain.Restaurant;
 import com.niit.domain.User;
+import com.niit.exception.MenuListNotFoundException;
+import com.niit.exception.RestaurantNotFoundException;
 import com.niit.service.IRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v2")
 public class RestaurantController {
     private IRestaurantService iRestaurantService;
-@Autowired
+    int restaurantId;
+    private ResponseEntity<?> responseEntity;
+
+    @Autowired
     public RestaurantController(IRestaurantService iRestaurantService) {
         this.iRestaurantService = iRestaurantService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user){
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
 
-        return  new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED) ;
+        return new ResponseEntity<>(iRestaurantService.registerUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/userbyid/{email}")
@@ -103,11 +105,56 @@ public class RestaurantController {
 
     @GetMapping("/getbycuisine/{cuisinename}")
     public ResponseEntity<?> getByCuisine(@PathVariable String cuisinename) {
-        return  new ResponseEntity<>(iRestaurantService.getRestaurantByCuisine(cuisinename), HttpStatus.OK) ;
+        return new ResponseEntity<>(iRestaurantService.getRestaurantByCuisine(cuisinename), HttpStatus.OK);
     }
 
     @GetMapping("/getbyprice/{price}")
     public ResponseEntity<?> getByPrice(@PathVariable int price) {
-        return  new ResponseEntity<>(iRestaurantService.getRestaurantByPrice(price), HttpStatus.OK) ;
+        return new ResponseEntity<>(iRestaurantService.getRestaurantByPrice(price), HttpStatus.OK);
     }
+
+
+    @PostMapping("/restaurant/addMenu/{restaurantId}")
+    public ResponseEntity<?> saveMenuToRestaurant(@RequestBody MenuList menuList, @PathVariable int restaurantId) throws RestaurantNotFoundException {
+        try {
+//            Claims claims = (Claims) request.getAttribute("claims");
+//            restaurantId = Integer.parseInt(claims.getSubject());
+//            System.out.println(" restaurantId from claims :: " + claims.getSubject());
+
+            System.out.println("restaurantId " + restaurantId);
+
+            responseEntity = new ResponseEntity<>(iRestaurantService.saveRestaurantMenuToList(menuList, restaurantId), HttpStatus.CREATED);
+        } catch (RestaurantNotFoundException e) {
+            System.out.println(e);
+            throw new RestaurantNotFoundException();
+        }
+
+        return responseEntity;
+    }
+
+
+    @GetMapping("/restaurant/menus")
+    public ResponseEntity<?> getAllMenusFromRestaurant() throws RestaurantNotFoundException {
+        try {
+            System.out.println("restaurantId " + restaurantId);
+            responseEntity = new ResponseEntity<>(iRestaurantService.getAllRestaurantMenu(restaurantId), HttpStatus.OK);
+        } catch (RestaurantNotFoundException e) {
+            throw new RestaurantNotFoundException();
+        }
+        return responseEntity;
+    }
+
+
+    @DeleteMapping("/menuList/{foodItemName}")
+    public ResponseEntity<?> deleteUserProductFromList(@PathVariable String foodItemName)
+            throws RestaurantNotFoundException, MenuListNotFoundException {
+        try {
+            responseEntity = new ResponseEntity<>(iRestaurantService.deleteRestaurantMenuFromList(restaurantId, foodItemName), HttpStatus.OK);
+        } catch (RestaurantNotFoundException | MenuListNotFoundException m) {
+            throw new MenuListNotFoundException();
+        }
+        return responseEntity;
+    }
+
+
 }

@@ -6,9 +6,12 @@
 
 package com.niit.domain;
 
+import org.springframework.data.annotation.Id;
+
 public class MenuList {
+    @Id
     private String foodItemName;
-    private String cuisine ;
+    private String cuisine;
     private int price;
 
     public MenuList() {

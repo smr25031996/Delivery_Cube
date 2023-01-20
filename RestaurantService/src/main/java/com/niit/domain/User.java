@@ -23,10 +23,12 @@ public class User {
     private String state;
     private String zip;
 
+    private Image image;
+
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip) {
+    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip, Image image) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -38,6 +40,7 @@ public class User {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.image = image;
     }
 
     public String getEmail() {
@@ -126,6 +129,14 @@ public class User {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override

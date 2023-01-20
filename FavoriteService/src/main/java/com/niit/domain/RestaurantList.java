@@ -1,8 +1,11 @@
 package com.niit.domain;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.List;
 
 public class RestaurantList {
+    @Id
     private int restaurantId;
     private String restaurantName;
     private double rating;

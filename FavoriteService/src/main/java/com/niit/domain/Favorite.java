@@ -10,7 +10,6 @@ public class Favorite {
     @Id
     private String email;
     private List<RestaurantList> restaurantList;
-
     public Favorite(String email, List<RestaurantList> restaurantList) {
         this.email = email;
         this.restaurantList = restaurantList;

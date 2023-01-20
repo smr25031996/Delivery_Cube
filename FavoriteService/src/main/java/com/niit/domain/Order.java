@@ -6,10 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 @Document
 public class Order {
+
     @Id
     private String email;
-    private List<RestaurantList>restaurantLists;
-    private int totalBill;
+    private int restaurantId;
+    private List<MenuList> menuList;
+    private int totalPrice;
 
     public String getEmail() {
         return email;
@@ -19,37 +21,46 @@ public class Order {
         this.email = email;
     }
 
-    public Order(String email, List<RestaurantList> restaurantLists, int totalBill) {
+    public Order(String email, int restaurantId, List<MenuList> menuList, int totalPrice) {
         this.email = email;
-        this.restaurantLists = restaurantLists;
-        this.totalBill = totalBill;
-    }
-
-    public int getTotalBill() {
-        return totalBill;
-    }
-
-    public void setTotalBill(int totalBill) {
-        this.totalBill = totalBill;
+        this.restaurantId = restaurantId;
+        this.menuList = menuList;
+        this.totalPrice = totalPrice;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "email='" + email + '\'' +
-                ", restaurantLists=" + restaurantLists +
-                ", totalBill=" + totalBill +
+                ", restaurantId=" + restaurantId +
+                ", menuList=" + menuList +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 
-    public List<RestaurantList> getRestaurantLists() {
-        return restaurantLists;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurantLists(List<RestaurantList> restaurantLists) {
-        this.restaurantLists = restaurantLists;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
+    public List<MenuList> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<MenuList> menuList) {
+        this.menuList = menuList;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Order() {
     }

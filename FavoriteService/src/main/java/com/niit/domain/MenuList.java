@@ -1,18 +1,27 @@
 package com.niit.domain;
 
+import org.springframework.data.annotation.Id;
+
 public class MenuList {
+    @Id
     private String foodItemName;
+    private String cuisine;
     private int price;
     private int quantity;
 
+    public MenuList(String foodItemName, String cuisine, int price, int quantity) {
+        this.foodItemName = foodItemName;
+        this.cuisine = cuisine;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
-    @Override
-    public String toString() {
-        return "MenuList{" +
-                "foodItemName='" + foodItemName + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 
     public String getFoodItemName() {
@@ -39,10 +48,14 @@ public class MenuList {
         this.quantity = quantity;
     }
 
-    public MenuList(String foodItemName, int price, int quantity) {
-        this.foodItemName = foodItemName;
-        this.price = price;
-        this.quantity = quantity;
+    @Override
+    public String toString() {
+        return "MenuList{" +
+                "foodItemName='" + foodItemName + '\'' +
+                ", cuisine='" + cuisine + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 
     public MenuList() {

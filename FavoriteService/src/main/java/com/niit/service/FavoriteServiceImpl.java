@@ -1,9 +1,6 @@
 package com.niit.service;
 
-import com.niit.domain.Cart;
-import com.niit.domain.Favorite;
-import com.niit.domain.Order;
-import com.niit.domain.RestaurantList;
+import com.niit.domain.*;
 import com.niit.repository.CartRepository;
 import com.niit.repository.FavoriteRepository;
 import com.niit.repository.OrderRepository;
@@ -91,43 +88,10 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
-    public Cart addToCart(Cart cart, String email) {
-        Optional<Cart> existingCart = cartRepository.findById(email);
-        if (existingCart.isEmpty()) {
-            return null;
-        }
-        Cart cart1 = existingCart.get();
-        if (cart.getEmail() != null) {
-            cart1.setEmail(cart.getEmail());
-        }
-        if (cart.getRestaurantList() != null) {
-            cart1.setRestaurantList(cart.getRestaurantList());
-        }
-
-
-        return cartRepository.save(cart1);
-    }
-
-    @Override
     public Order addOrder(Order order, String email) {
-        Optional<Order> existingOrder = orderRepository.findById(email);
-        if (existingOrder.isEmpty()) {
-            return null;
-        }
-        Order order1 = existingOrder.get();
-        if (order.getEmail() != null) {
-            order1.setEmail(order.getEmail());
-        }
-
-        if (order.getRestaurantLists() != null) {
-            order1.setRestaurantLists(order.getRestaurantLists());
-        }
-        if (order.getTotalBill() == 0) {
-            order1.setTotalBill(order.getTotalBill());
-        }
-
-        return orderRepository.save(order1);
+        return null;
     }
+
 
     @Override
     public Favorite saveRestaurantToFavorites(RestaurantList restaurantList, String email) {
@@ -171,44 +135,85 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
-    public Cart saveRestaurantToCart(RestaurantList restaurantList, String email) {
+    public Cart saveMenuToCart(MenuList menuList, String email) {
         if (cartRepository.findById(email).isEmpty()) {
-            System.out.println("no favorites");
+            System.out.println("no items found");
 
         }
         Cart cart = cartRepository.findByEmail(email);
-        if (cart.getRestaurantList() == null) {
+        if (cart.getMenuList() == null) {
             System.out.println("In repo " + email);
-            cart.setRestaurantList(Collections.singletonList(restaurantList));
+            cart.setMenuList(Collections.singletonList(menuList));
         } else {
-            List<RestaurantList> restaurantLists = cart.getRestaurantList();
-            restaurantLists.add(restaurantList);
-            cart.setRestaurantList(restaurantLists);
+            List<MenuList> menuLists = cart.getMenuList();
+            menuLists.add(menuList);
+            cart.setMenuList(menuLists);
         }
         return cartRepository.save(cart);
     }
 
     @Override
-    public List<RestaurantList> getAllRestaurantFromCart(String email) {
+    public List<MenuList> getAllMenusFromCart(String email) {
         if (cartRepository.findById(email).isEmpty()) {
             System.out.println("list is empty");
         }
-        return cartRepository.findById(email).get().getRestaurantList();
+        return cartRepository.findById(email).get().getMenuList();
     }
 
     @Override
-    public Cart deleteRestaurantFromCart(String email, int restaurant) {
-        boolean ifResatuarantIsPresent = false;
-        if (cartRepository.findById(email).isEmpty()) {
+    public Cart deleteMenuFromCart(String email, String foodItemName) {
+        boolean foodItemIsPresent = false;
+        if (orderRepository.findById(email).isEmpty()) {
         }
         Cart cart = cartRepository.findById(email).get();
-        List<RestaurantList> restaurantList = cart.getRestaurantList();
-        ifResatuarantIsPresent = restaurantList.removeIf(x -> x.getRestaurantId() == (restaurant));
-        if (!ifResatuarantIsPresent) {
+        List<MenuList> menuLists = cart.getMenuList();
+        foodItemIsPresent = menuLists.removeIf(x -> x.getFoodItemName().equals(foodItemName));
+        if (!foodItemIsPresent) {
             System.out.println("list is empty");
         }
-        cart.setRestaurantList(restaurantList);
+        cart.setMenuList(menuLists);
         return cartRepository.save(cart);
+    }
+
+    @Override
+    public Order saveMenuToOrder(MenuList menuList, String email) {
+        if (orderRepository.findById(email).isEmpty()) {
+            System.out.println("no Orders found");
+
+        }
+        Order order = orderRepository.findByEmail(email);
+        if (order.getMenuList() == null) {
+            System.out.println("In repo " + email);
+            order.setMenuList(Collections.singletonList(menuList));
+        } else {
+            List<MenuList> menuLists = order.getMenuList();
+            menuLists.add(menuList);
+            order.setMenuList(menuLists);
+        }
+        return orderRepository.save(order);
+    }
+
+    @Override
+    public List<MenuList> getAllMenusFromOrder(String email) {
+        if (orderRepository.findById(email).isEmpty()) {
+            System.out.println("list is empty");
+        }
+        return orderRepository.findById(email).get().getMenuList();
+    }
+
+    @Override
+    public Order deleteMenuFromOrder(String email, String foodItemName) {
+        boolean foodItemIsPresent = false;
+        if (orderRepository.findById(email).isEmpty()) {
+        }
+        Order order = orderRepository.findById(email).get();
+        List<MenuList> menuLists = order.getMenuList();
+        foodItemIsPresent = menuLists.removeIf(x -> x.getFoodItemName().equals(foodItemName));
+        if (!foodItemIsPresent) {
+            System.out.println("list is empty");
+        }
+        order.setMenuList(menuLists);
+        return orderRepository.save(order);
     }
 }
 

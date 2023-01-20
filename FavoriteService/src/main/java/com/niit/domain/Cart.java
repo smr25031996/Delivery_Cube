@@ -9,19 +9,24 @@ import java.util.List;
 public class Cart {
     @Id
     private String email;
-    private List<MenuList> menuLists;
+    private List<RestaurantList> restaurantList;
 
-    public Cart(String email, List<MenuList> menuLists) {
-        this.email = email;
-        this.menuLists = menuLists;
-    }
 
     public Cart() {
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" + "email='" + email + '\'' + ", menuLists=" + menuLists + '}';
+
+    public Cart(String email, List<RestaurantList> restaurantList) {
+        this.email = email;
+        this.restaurantList = restaurantList;
+    }
+
+    public List<RestaurantList> getRestaurantList() {
+        return restaurantList;
+    }
+
+    public void setRestaurantList(List<RestaurantList> restaurantList) {
+        this.restaurantList = restaurantList;
     }
 
     public String getEmail() {
@@ -32,11 +37,11 @@ public class Cart {
         this.email = email;
     }
 
-    public List<MenuList> getMenuLists() {
-        return menuLists;
-    }
-
-    public void setMenuLists(List<MenuList> menuLists) {
-        this.menuLists = menuLists;
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "email='" + email + '\'' +
+                ", restaurantList=" + restaurantList +
+                '}';
     }
 }

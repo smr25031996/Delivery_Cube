@@ -3,6 +3,7 @@ package com.niit.controller;
 import com.niit.domain.Cart;
 import com.niit.domain.Favorite;
 import com.niit.domain.Order;
+import com.niit.domain.RestaurantList;
 import com.niit.service.IFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v3")
 public class FavoriteController {
     private final IFavoriteService iFavoriteService;
+    private ResponseEntity<?> responseEntity;
 
     @Autowired
     public FavoriteController(IFavoriteService iFavoriteService) {
@@ -65,5 +67,42 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.addToCart(cart, email), HttpStatus.ACCEPTED);
     }
 
+
+    @PostMapping("/favorite/addRestaurant/{email}")
+    public ResponseEntity<?> saveMenuToRestaurant(@RequestBody RestaurantList restaurantList, @PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+
+        responseEntity = new ResponseEntity<>(iFavoriteService.saveRestaurantToFavorites(restaurantList, email), HttpStatus.CREATED);
+//        } catch (RestaurantNotFoundException e) {
+//            System.out.println(e);
+//            throw new RestaurantNotFoundException();
+//        }
+
+        return responseEntity;
+    }
+
+
+    @GetMapping("/favorite/restaurants/{email}")
+    public ResponseEntity<?> getAllMenusFromRestaurant(@PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+        responseEntity = new ResponseEntity<>(iFavoriteService.getAllRestaurantFromFavorites(email), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException e) {
+//            throw new RestaurantNotFoundException();
+//        }
+        return responseEntity;
+    }
+
+
+    @DeleteMapping("/restaurantList/{email}/{restaurantId}")
+    public ResponseEntity<?> deleteUserProductFromList(@PathVariable String email, @PathVariable int restaurantId) {
+//        try {
+        responseEntity = new ResponseEntity<>(iFavoriteService.deleteRestaurantFromFavorites(email, restaurantId), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException | MenuListNotFoundException m) {
+//            throw new MenuListNotFoundException();
+//        }
+        return responseEntity;
+    }
 
 }

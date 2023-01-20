@@ -3,6 +3,7 @@ package com.niit.service;
 import com.niit.domain.Cart;
 import com.niit.domain.Favorite;
 import com.niit.domain.Order;
+import com.niit.domain.RestaurantList;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +22,28 @@ public interface IFavoriteService {
     List<Order> getOrderList();
 
     Favorite getByEmail(String email);
+
     Optional<Order> getOrderByEmail(String email);
+
     Optional<Cart> getCartByEmail(String email);
 
     Favorite addFavourite(Favorite favorite, String email);
+
     Cart addToCart(Cart cart, String email);
+
     Order addOrder(Order order, String email);
 
 
+    Favorite saveRestaurantToFavorites(RestaurantList restaurantList, String email);
+
+    List<RestaurantList> getAllRestaurantFromFavorites(String email);
+
+    Favorite deleteRestaurantFromFavorites(String email, int restaurant);
+
+
+    Cart saveRestaurantToCart(RestaurantList restaurantList, String email);
+
+    List<RestaurantList> getAllRestaurantFromCart(String email);
+
+    Cart deleteRestaurantFromCart(String email, int restaurant);
 }

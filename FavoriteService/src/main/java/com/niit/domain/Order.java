@@ -8,7 +8,6 @@ import java.util.List;
 public class Order {
     @Id
     private String email;
-    private List<MenuList> menuLists;
     private List<RestaurantList>restaurantLists;
     private int totalBill;
 
@@ -20,12 +19,10 @@ public class Order {
         this.email = email;
     }
 
-    public List<MenuList> getMenuLists() {
-        return menuLists;
-    }
-
-    public void setMenuLists(List<MenuList> menuLists) {
-        this.menuLists = menuLists;
+    public Order(String email, List<RestaurantList> restaurantLists, int totalBill) {
+        this.email = email;
+        this.restaurantLists = restaurantLists;
+        this.totalBill = totalBill;
     }
 
     public int getTotalBill() {
@@ -40,7 +37,6 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "email='" + email + '\'' +
-                ", menuLists=" + menuLists +
                 ", restaurantLists=" + restaurantLists +
                 ", totalBill=" + totalBill +
                 '}';
@@ -54,12 +50,6 @@ public class Order {
         this.restaurantLists = restaurantLists;
     }
 
-    public Order(String email, List<MenuList> menuLists, List<RestaurantList> restaurantLists, int totalBill) {
-        this.email = email;
-        this.menuLists = menuLists;
-        this.restaurantLists = restaurantLists;
-        this.totalBill = totalBill;
-    }
 
     public Order() {
     }

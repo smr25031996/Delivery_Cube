@@ -117,10 +117,6 @@ public class RestaurantController {
     @PostMapping("/restaurant/addMenu/{restaurantId}")
     public ResponseEntity<?> saveMenuToRestaurant(@RequestBody MenuList menuList, @PathVariable int restaurantId) throws RestaurantNotFoundException {
         try {
-//            Claims claims = (Claims) request.getAttribute("claims");
-//            restaurantId = Integer.parseInt(claims.getSubject());
-//            System.out.println(" restaurantId from claims :: " + claims.getSubject());
-
             System.out.println("restaurantId " + restaurantId);
 
             responseEntity = new ResponseEntity<>(iRestaurantService.saveRestaurantMenuToList(menuList, restaurantId), HttpStatus.CREATED);
@@ -133,8 +129,8 @@ public class RestaurantController {
     }
 
 
-    @GetMapping("/restaurant/menus")
-    public ResponseEntity<?> getAllMenusFromRestaurant() throws RestaurantNotFoundException {
+    @GetMapping("/restaurant/menus/{restaurantId}")
+    public ResponseEntity<?> getAllMenusFromRestaurant(@PathVariable int restaurantId) throws RestaurantNotFoundException {
         try {
             System.out.println("restaurantId " + restaurantId);
             responseEntity = new ResponseEntity<>(iRestaurantService.getAllRestaurantMenu(restaurantId), HttpStatus.OK);
@@ -145,8 +141,8 @@ public class RestaurantController {
     }
 
 
-    @DeleteMapping("/menuList/{foodItemName}")
-    public ResponseEntity<?> deleteUserProductFromList(@PathVariable String foodItemName)
+    @DeleteMapping("/menuList/{restaurantId}/{foodItemName}")
+    public ResponseEntity<?> deleteUserProductFromList(@PathVariable int restaurantId, @PathVariable String foodItemName)
             throws RestaurantNotFoundException, MenuListNotFoundException {
         try {
             responseEntity = new ResponseEntity<>(iRestaurantService.deleteRestaurantMenuFromList(restaurantId, foodItemName), HttpStatus.OK);

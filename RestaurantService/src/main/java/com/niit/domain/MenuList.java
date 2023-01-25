@@ -13,14 +13,34 @@ public class MenuList {
     private String foodItemName;
     private String cuisine;
     private int price;
+    private int quantity;
 
     public MenuList() {
     }
 
-    public MenuList(String foodItemName, String cuisine, int price) {
+    public MenuList(String foodItemName, String cuisine, int price, int quantity) {
         this.foodItemName = foodItemName;
         this.cuisine = cuisine;
         this.price = price;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuList{" +
+                "foodItemName='" + foodItemName + '\'' +
+                ", cuisine='" + cuisine + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getFoodItemName() {
@@ -47,12 +67,4 @@ public class MenuList {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "MenuList{" +
-                "foodItemName='" + foodItemName + '\'' +
-                ", cuisine='" + cuisine + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

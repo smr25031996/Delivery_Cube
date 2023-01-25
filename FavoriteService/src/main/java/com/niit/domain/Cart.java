@@ -9,24 +9,46 @@ import java.util.List;
 public class Cart {
     @Id
     private String email;
-    private List<RestaurantList> restaurantList;
+    private int restaurantId;
+    private List<MenuList> menuList;
+    private int totalPrice;
 
 
     public Cart() {
     }
 
 
-    public Cart(String email, List<RestaurantList> restaurantList) {
+    public Cart(String email, int restaurantId, List<MenuList> menuList, int totalPrice) {
         this.email = email;
-        this.restaurantList = restaurantList;
+        this.restaurantId = restaurantId;
+        this.menuList = menuList;
+        this.totalPrice = totalPrice;
     }
 
-    public List<RestaurantList> getRestaurantList() {
-        return restaurantList;
+    public List<MenuList> getMenuList() {
+        return menuList;
     }
 
-    public void setRestaurantList(List<RestaurantList> restaurantList) {
-        this.restaurantList = restaurantList;
+    public void setMenuList(List<MenuList> menuList) {
+        this.menuList = menuList;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "email='" + email + '\'' +
+                ", restaurantId=" + restaurantId +
+                ", menuList=" + menuList +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getEmail() {
@@ -37,11 +59,12 @@ public class Cart {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "email='" + email + '\'' +
-                ", restaurantList=" + restaurantList +
-                '}';
+    public int getTotalPrice() {
+        return totalPrice;
     }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
 }

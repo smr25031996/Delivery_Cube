@@ -1,9 +1,6 @@
 package com.niit.controller;
 
-import com.niit.domain.Cart;
-import com.niit.domain.Favorite;
-import com.niit.domain.Order;
-import com.niit.domain.RestaurantList;
+import com.niit.domain.*;
 import com.niit.service.IFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,10 +59,7 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.addOrder(order, email), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/addCart/{email}")
-    public ResponseEntity<?> addCart(@RequestBody Cart cart, @PathVariable String email) {
-        return new ResponseEntity<>(iFavoriteService.addToCart(cart, email), HttpStatus.ACCEPTED);
-    }
+
 
 
     @PostMapping("/favorite/addRestaurant/{email}")
@@ -82,7 +76,6 @@ public class FavoriteController {
         return responseEntity;
     }
 
-
     @GetMapping("/favorite/restaurants/{email}")
     public ResponseEntity<?> getAllMenusFromRestaurant(@PathVariable String email) {
 //        try {
@@ -96,9 +89,83 @@ public class FavoriteController {
 
 
     @DeleteMapping("/restaurantList/{email}/{restaurantId}")
-    public ResponseEntity<?> deleteUserProductFromList(@PathVariable String email, @PathVariable int restaurantId) {
+    public ResponseEntity<?> deleteRestaurantFromFavorites(@PathVariable String email, @PathVariable int restaurantId) {
 //        try {
         responseEntity = new ResponseEntity<>(iFavoriteService.deleteRestaurantFromFavorites(email, restaurantId), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException | MenuListNotFoundException m) {
+//            throw new MenuListNotFoundException();
+//        }
+        return responseEntity;
+    }
+
+
+    @PostMapping("/cart/addMenu/{email}")
+    public ResponseEntity<?> saveMenuToCart(@RequestBody MenuList menuList, @PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+
+        responseEntity = new ResponseEntity<>(iFavoriteService.saveMenuToCart(menuList, email), HttpStatus.CREATED);
+//        } catch (RestaurantNotFoundException e) {
+//            System.out.println(e);
+//            throw new RestaurantNotFoundException();
+//        }
+
+        return responseEntity;
+    }
+
+    @GetMapping("/cart/menus/{email}")
+    public ResponseEntity<?> getAllMenusFromCart(@PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+        responseEntity = new ResponseEntity<>(iFavoriteService.getAllMenusFromCart(email), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException e) {
+//            throw new RestaurantNotFoundException();
+//        }
+        return responseEntity;
+    }
+
+
+    @DeleteMapping("/menuList/{email}/{foodItemName}")
+    public ResponseEntity<?> deleteMenuProductFromList(@PathVariable String email, @PathVariable String foodItemName) {
+//        try {
+        responseEntity = new ResponseEntity<>(iFavoriteService.deleteMenuFromCart(email, foodItemName), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException | MenuListNotFoundException m) {
+//            throw new MenuListNotFoundException();
+//        }
+        return responseEntity;
+    }
+
+
+    @PostMapping("/order/{email}")
+    public ResponseEntity<?> saveMenuToOrder(@RequestBody MenuList menuList, @PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+
+        responseEntity = new ResponseEntity<>(iFavoriteService.saveMenuToOrder(menuList, email), HttpStatus.CREATED);
+//        } catch (RestaurantNotFoundException e) {
+//            System.out.println(e);
+//            throw new RestaurantNotFoundException();
+//        }
+
+        return responseEntity;
+    }
+
+    @GetMapping("/order/menus/{email}")
+    public ResponseEntity<?> getAllMenusFromOrder(@PathVariable String email) {
+//        try {
+        System.out.println("email " + email);
+        responseEntity = new ResponseEntity<>(iFavoriteService.getAllMenusFromOrder(email), HttpStatus.OK);
+//        } catch (RestaurantNotFoundException e) {
+//            throw new RestaurantNotFoundException();
+//        }
+        return responseEntity;
+    }
+
+
+    @DeleteMapping("/menus/{email}/{foodItemName}")
+    public ResponseEntity<?> deleteMenuProductFromOrder(@PathVariable String email, @PathVariable String foodItemName) {
+//        try {
+        responseEntity = new ResponseEntity<>(iFavoriteService.deleteMenuFromOrder(email, foodItemName), HttpStatus.OK);
 //        } catch (RestaurantNotFoundException | MenuListNotFoundException m) {
 //            throw new MenuListNotFoundException();
 //        }

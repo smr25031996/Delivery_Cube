@@ -26,40 +26,36 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RestaurantServiceImpl implements IRestaurantService{
-    private RestaurantRepository restaurantRepository;
-    private UserRepository userRepository;
-
-    private UserProxy userProxy;
-    private  Optional<User> favoriteUser;
-
+public class RestaurantServiceImpl implements IRestaurantService {
     private final RabbitTemplate rabbitTemplate;
     private final DirectExchange directExchange;
-
     @Autowired
     Producer producer;
+    private final RestaurantRepository restaurantRepository;
+    private final UserRepository userRepository;
+    private final UserProxy userProxy;
+    private Optional<User> favoriteUser;
 
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, UserProxy userProxy, Optional<User> favoriteUser,RabbitTemplate rabbitTemplate,DirectExchange directExchange) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, UserRepository userRepository, UserProxy userProxy, Optional<User> favoriteUser, RabbitTemplate rabbitTemplate, DirectExchange directExchange) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.userProxy = userProxy;
         this.rabbitTemplate = rabbitTemplate;
         this.directExchange = directExchange;
-        this.favoriteUser= favoriteUser;
+        this.favoriteUser = favoriteUser;
     }
 
     @Override
     public User registerUser(User user) {
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setEmail(user.getEmail());
-        if(userRepository.findById(user.getEmail()).isPresent())
-        {
-           favoriteUser=getUserByEmail(user.getEmail());
+        if (userRepository.findById(user.getEmail()).isPresent()) {
+            favoriteUser = getUserByEmail(user.getEmail());
             if (user.getEmail().equals(favoriteUser.get().getEmail())) {
                 System.out.println("Invalid email: " + user.getEmail());
             } else {
-               userRepository.save(user);
+                userRepository.save(user);
                 System.out.println("saved user in mongo");
                 producer.sendMessage(messageDTO);
             }
@@ -122,9 +118,9 @@ public class RestaurantServiceImpl implements IRestaurantService{
     @Override
     public Optional<User> getUserByEmail(String email) {
 
-        Optional<User> user=userRepository.findById(email);
+        Optional<User> user = userRepository.findById(email);
 
-        System.out.println(" user data fetched from client request---"+user.get().toString());
+        System.out.println(" user data fetched from client request---" + user.get());
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setEmail(user.get().getEmail());
         producer.sendMessage(messageDTO);
@@ -166,7 +162,7 @@ public class RestaurantServiceImpl implements IRestaurantService{
     @Override
     public boolean deleteRestaurants(int id) {
         restaurantRepository.deleteById(id);
-         return true;
+        return true;
     }
 
     @Override

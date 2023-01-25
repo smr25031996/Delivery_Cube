@@ -23,8 +23,6 @@ w
 GFavoriteService/src/main/java/com/niit/service/FavoriteServiceImpl.java,e\7\e7007bbdae47e2aa9fec264a756c6c07fb1c2a40
 y
 IFavoriteService/src/main/java/com/niit/controller/FavoriteController.java,9\8\98b1f54faeea5d9fd9db76fff06930b22e29734f
-l
-<RestaurantService/src/main/java/com/niit/domain/Address.java,e\9\e922da3e7c2203bc8e8c3fb5fefe7559e6e55ad7
 t
 DFavoriteService/src/main/java/com/niit/service/IFavoriteService.java,5\6\5678360e55af1c79576c20130f5e034363e3048f
 —
@@ -33,3 +31,17 @@ gUserAuthentication/src/main/java/com/niit/UserAuthentication/service/JwtSecurit
 `UserAuthentication/src/main/java/com/niit/UserAuthentication/service/SecurityTokenGenerator.java,d\3\d35899b9a2bf548e221421fc77c9f249fecc544d
 ‹
 [UserAuthentication/src/main/java/com/niit/UserAuthentication/controller/UserController.java,1\8\18cca92619539d4e2a7a37af3fb5b3b61526bf8e
+}
+MUserAuthentication/src/main/java/com/niit/UserAuthentication/domain/User.java,3\5\35008855e80ab734301b28fe51ec29f527bbd92c
+}
+MRestaurantService/src/main/java/com/niit/repository/RestaurantRepository.java,9\9\9988b79d2c16e677966c9cac045472b5dd758827
+I
+RestaurantService/pom.xml,1\d\1d198e678bfdac69155bf7fbd12bf3ca114b3a05
+|
+LRestaurantService/src/main/java/com/niit/controller/ImageUploadResponse.java,b\f\bf8db97660c6c0eeaceeaf8b192929527b2209ec
+o
+?RestaurantService/src/main/java/com/niit/domain/Restaurant.java,e\f\efc0f16a3a2942060429dbd45a681b68d366eb55
+o
+?RestaurantService/src/main/java/com/niit/util/ImageUtility.java,6\5\6532463a53016350737ab844c5e741c86c6b59ba
+m
+=RestaurantService/src/main/java/com/niit/proxy/UserProxy.java,9\9\99649a5b1393686326b8f722e114292a2fe3b78b

@@ -5,9 +5,11 @@
  */
 package com.niit.domain;
 
+import lombok.Builder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Builder
 @Document
 public class User {
     @Id
@@ -23,12 +25,14 @@ public class User {
     private String state;
     private String zip;
 
-    private Image image;
+    private byte[] image;
+    private String type;
+    private String imageName;
 
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip, Image image) {
+    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip, byte[] image, String type, String imageName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -41,6 +45,8 @@ public class User {
         this.state = state;
         this.zip = zip;
         this.image = image;
+        this.type = type;
+        this.imageName = imageName;
     }
 
     public String getEmail() {
@@ -131,12 +137,29 @@ public class User {
         this.zip = zip;
     }
 
-    public Image getImage() {
+
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

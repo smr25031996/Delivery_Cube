@@ -29,6 +29,7 @@ public interface IFavoriteService {
 
     Order addOrder(Order order, String email);
 
+    boolean deleteCart(String email);
 
     Favorite saveRestaurantToFavorites(RestaurantList restaurantList, String email);
 
@@ -49,4 +50,8 @@ public interface IFavoriteService {
     List<MenuList> getAllMenusFromOrder(String email);
 
     Order deleteMenuFromOrder(String email, String foodItemName);
+
+    CheckOutDetails saveCheckOutDetails(CheckOutDetails checkOutDetails);
+
+    Optional<CheckOutDetails> getAllCheckOutDetails(int id);
 }

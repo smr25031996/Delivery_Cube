@@ -8,6 +8,7 @@ public class RestaurantList {
     @Id
     private int restaurantId;
     private String restaurantName;
+    private String Description;
     private double rating;
     private List<MenuList> menuList;
     private String location;
@@ -15,12 +16,33 @@ public class RestaurantList {
     public RestaurantList() {
     }
 
-    public RestaurantList(int restaurantId, String restaurantName, double rating, List<MenuList> menuList, String location) {
+    public RestaurantList(int restaurantId, String restaurantName, String description, double rating, List<MenuList> menuList, String location) {
         this.restaurantId = restaurantId;
         this.restaurantName = restaurantName;
+        Description = description;
         this.rating = rating;
         this.menuList = menuList;
         this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "RestaurantList{" +
+                "restaurantId=" + restaurantId +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", Description='" + Description + '\'' +
+                ", rating=" + rating +
+                ", menuList=" + menuList +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public int getRestaurantId() {
@@ -63,15 +85,5 @@ public class RestaurantList {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "RestaurantList{" +
-                "restaurantId=" + restaurantId +
-                ", restaurantName='" + restaurantName + '\'' +
-                ", rating=" + rating +
-                ", menuList=" + menuList +
-                ", location='" + location + '\'' +
-                '}';
-    }
 }
 

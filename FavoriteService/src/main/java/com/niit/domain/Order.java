@@ -9,7 +9,6 @@ public class Order {
 
     @Id
     private String email;
-    private int restaurantId;
     private List<MenuList> menuList;
     private int totalPrice;
 
@@ -21,9 +20,8 @@ public class Order {
         this.email = email;
     }
 
-    public Order(String email, int restaurantId, List<MenuList> menuList, int totalPrice) {
+    public Order(String email, List<MenuList> menuList, int totalPrice) {
         this.email = email;
-        this.restaurantId = restaurantId;
         this.menuList = menuList;
         this.totalPrice = totalPrice;
     }
@@ -32,19 +30,12 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "email='" + email + '\'' +
-                ", restaurantId=" + restaurantId +
                 ", menuList=" + menuList +
                 ", totalPrice=" + totalPrice +
                 '}';
     }
 
-    public int getRestaurantId() {
-        return restaurantId;
-    }
 
-    public void setRestaurantId(int restaurantId) {
-        this.restaurantId = restaurantId;
-    }
 
     public List<MenuList> getMenuList() {
         return menuList;

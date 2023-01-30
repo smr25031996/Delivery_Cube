@@ -39,6 +39,16 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.getFavoriteList(), HttpStatus.OK);
     }
 
+    @PostMapping("/saveCheckOutDetails")
+    public ResponseEntity<?> saveOrder(@RequestBody CheckOutDetails checkOutDetails) {
+        return new ResponseEntity<>(iFavoriteService.saveCheckOutDetails(checkOutDetails), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getCheckoutDetails/{id}")
+    public ResponseEntity<?> getCheckOutDetails(@PathVariable int id) {
+        return new ResponseEntity<>(iFavoriteService.getAllCheckOutDetails(id), HttpStatus.OK);
+    }
+
     @GetMapping("/getCart")
     public ResponseEntity<?> getCart() {
         return new ResponseEntity<>(iFavoriteService.getCartList(), HttpStatus.OK);
@@ -59,7 +69,15 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.addOrder(order, email), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/Order/{email}")
+    public ResponseEntity<?> getOrderByEmail(@PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.getOrderByEmail(email), HttpStatus.ACCEPTED);
+    }
 
+    @DeleteMapping("/deleteCart/{email}")
+    public ResponseEntity<?> deleteCartByEmail(@PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.deleteCart(email), HttpStatus.ACCEPTED);
+    }
 
 
     @PostMapping("/favorite/addRestaurant/{email}")

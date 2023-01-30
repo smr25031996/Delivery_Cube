@@ -2,6 +2,7 @@ package com.niit.service;
 
 import com.niit.domain.*;
 import com.niit.repository.CartRepository;
+import com.niit.repository.CheckOutRepository;
 import com.niit.repository.FavoriteRepository;
 import com.niit.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ public class FavoriteServiceImpl implements IFavoriteService {
     private FavoriteRepository favoriteRepository;
     private CartRepository cartRepository;
     private OrderRepository orderRepository;
+    private CheckOutRepository checkOutRepository;
 
     @Autowired
-    public FavoriteServiceImpl(FavoriteRepository favoriteRepository, CartRepository cartRepository, OrderRepository orderRepository) {
+    public FavoriteServiceImpl(FavoriteRepository favoriteRepository, CheckOutRepository checkOutRepository, CartRepository cartRepository, OrderRepository orderRepository) {
         this.favoriteRepository = favoriteRepository;
         this.cartRepository = cartRepository;
         this.orderRepository = orderRepository;
+        this.checkOutRepository = checkOutRepository;
     }
 
     @Override
@@ -90,6 +93,12 @@ public class FavoriteServiceImpl implements IFavoriteService {
     @Override
     public Order addOrder(Order order, String email) {
         return null;
+    }
+
+    @Override
+    public boolean deleteCart(String email) {
+        cartRepository.deleteById(email);
+        return true;
     }
 
 
@@ -214,6 +223,16 @@ public class FavoriteServiceImpl implements IFavoriteService {
         }
         order.setMenuList(menuLists);
         return orderRepository.save(order);
+    }
+
+    @Override
+    public CheckOutDetails saveCheckOutDetails(CheckOutDetails checkOutDetails) {
+        return checkOutRepository.save(checkOutDetails);
+    }
+
+    @Override
+    public Optional<CheckOutDetails> getAllCheckOutDetails(int id) {
+        return checkOutRepository.findById(id);
     }
 }
 

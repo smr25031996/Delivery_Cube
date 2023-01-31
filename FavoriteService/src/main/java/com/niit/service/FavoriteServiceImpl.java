@@ -231,7 +231,12 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
-    public Optional<CheckOutDetails> getAllCheckOutDetails(int id) {
+    public List<CheckOutDetails> getAllCheckOutDetails(String email) {
+        return checkOutRepository.findAllCheckOutDetailsEmail((email));
+    }
+
+    @Override
+    public Optional<CheckOutDetails> getCheckOutDetails(int id) {
         return checkOutRepository.findById(id);
     }
 }

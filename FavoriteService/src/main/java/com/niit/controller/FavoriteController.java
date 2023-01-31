@@ -44,10 +44,16 @@ public class FavoriteController {
         return new ResponseEntity<>(iFavoriteService.saveCheckOutDetails(checkOutDetails), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getCheckoutDetails/{id}")
-    public ResponseEntity<?> getCheckOutDetails(@PathVariable int id) {
-        return new ResponseEntity<>(iFavoriteService.getAllCheckOutDetails(id), HttpStatus.OK);
+    @GetMapping("/getCheckoutDetails/{email}")
+    public ResponseEntity<?> getCheckOutDetails(@PathVariable String email) {
+        return new ResponseEntity<>(iFavoriteService.getAllCheckOutDetails(email), HttpStatus.OK);
     }
+
+    @GetMapping("/getCurrentCheckoutDetail/{id}")
+    public ResponseEntity<?> getCheckOutDetails(@PathVariable int id) {
+        return new ResponseEntity<>(iFavoriteService.getCheckOutDetails(id), HttpStatus.OK);
+    }
+
 
     @GetMapping("/getCart")
     public ResponseEntity<?> getCart() {

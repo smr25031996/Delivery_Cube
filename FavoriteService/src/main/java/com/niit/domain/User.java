@@ -15,35 +15,27 @@ public class User {
     private String firstName;
     private String lastName;
     private long phone;
-    private String role = "User";
-    private String profileImage;
     private String street;
     private String city;
     private String state;
     private String zip;
 
-    private byte[] image;
-    private String type;
-    private String imageName;
 
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, long phone, String role, String profileImage, String street, String city, String state, String zip, byte[] image, String type, String imageName) {
+    public User(String email, String password, String firstName, String lastName, long phone, String street, String city, String state, String zip) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.role = role;
-        this.profileImage = profileImage;
+
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.image = image;
-        this.type = type;
-        this.imageName = imageName;
+
     }
 
     public String getEmail() {
@@ -86,21 +78,7 @@ public class User {
         this.phone = phone;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
 
     public String getStreet() {
         return street;
@@ -135,29 +113,7 @@ public class User {
     }
 
 
-    public byte[] getImage() {
-        return image;
-    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     @Override
     public String toString() {
@@ -167,8 +123,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone=" + phone +
-                ", role='" + role + '\'' +
-                ", profileImage='" + profileImage + '\'' +
+
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +

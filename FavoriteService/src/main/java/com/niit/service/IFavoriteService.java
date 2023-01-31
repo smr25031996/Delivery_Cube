@@ -53,5 +53,7 @@ public interface IFavoriteService {
 
     CheckOutDetails saveCheckOutDetails(CheckOutDetails checkOutDetails);
 
-    Optional<CheckOutDetails> getAllCheckOutDetails(int id);
+    List<CheckOutDetails> getAllCheckOutDetails(String email);
+
+    Optional<CheckOutDetails> getCheckOutDetails(int id);
 }
